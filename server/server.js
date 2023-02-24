@@ -20,7 +20,7 @@ const io = new Server(server, {
 
 io.on('connection', (socket)=>{
     console.log(`User: ${socket.id} just connected`);
-    console.log(socket);
+    
 })
 
 

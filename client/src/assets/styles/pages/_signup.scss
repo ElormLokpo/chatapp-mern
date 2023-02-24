@@ -1,0 +1,14 @@
+.main-signup-container{
+    // background: url('../../images/signup.jpg') no-repeat center center fixed; 
+    // -webkit-background-size: cover;
+    // -moz-background-size: cover;
+    // -o-background-size: cover;
+    @apply bg-gray-800;
+}
+
+
+
+.box{
+    width: 24vw;
+    @apply bg-gray-700 text-white;
+}
