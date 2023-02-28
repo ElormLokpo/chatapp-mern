@@ -1,6 +1,5 @@
 import ReactDOM from 'react-dom';
 import './assets/styles/main.scss';
-import Main from './layouts/main'
-import Auth from './pages/auth';
+import Main from './layouts/main';
 
-ReactDOM.render(<Auth />, document.querySelector('#root'));
+ReactDOM.render(<Main />, document.querySelector('#root'));

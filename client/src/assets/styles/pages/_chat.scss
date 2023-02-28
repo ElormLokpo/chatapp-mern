@@ -1,0 +1,24 @@
+.chat-header{
+    position: fixed;
+    top:0;
+    width: 83.5%;
+    background-color: $gray-600;
+}
+
+.message-box-container{
+    position: fixed;
+    bottom: 0;
+    width: 83.5%;
+    background-color: $gray-630;
+}
+
+.main-usr-msg{
+    max-width: 40%;
+   
+}
+
+
+.other-usr-msg{
+    max-width: 40%;
+   
+}

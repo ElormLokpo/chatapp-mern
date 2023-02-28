@@ -2,19 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@import './components/sidenav';
 @import './pages/signup';
+@import './variables';
+@import './utilities';
+@import './pages/chat';
 
 
 
 html{
     height: 100%;
     ::-webkit-scrollbar-track{
-       
+   
     }
 }
 
 body{
     height: 100%;
+    @apply text-white text-sm;
+    background-color: $gray-600;
 }
 
 #root{
