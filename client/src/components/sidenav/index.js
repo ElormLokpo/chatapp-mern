@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import { BsDot } from 'react-icons/bs';
 
 function SideNav({socket}) {
@@ -6,10 +6,13 @@ function SideNav({socket}) {
 
     
     const setRoomHandler = ()=>{
-        socket.emit('join_room', room);
-        console.log('emmitted');
+        // socket.emit('join-room', room);
+        // console.log('emmitted');
     }
 
+    useEffect(()=>{
+        socket.emit('join-room',room);
+    },[])
   return (
     <>  
          <div className='bgc-gray-700 col-span-2 p-4 side-nav'>

@@ -9,16 +9,16 @@ import TopNav from '../../components/topnav';
 
 
 function Chat({socket}) {
-  console.log(socket)
+
   return (
     <div className='bgc-gray-600 h-screen grid grid-cols-12'>
        <SideNav socket = {socket} />
 
         <div className=' col-span-10'>
            <TopNav />
-           <Chats />
+           <Chats socket = {socket} />
 
-           <MessageBox />
+           <MessageBox socket = {socket} />
         </div>
     </div>
   )

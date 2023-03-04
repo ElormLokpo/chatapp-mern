@@ -1,6 +1,15 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
-function Chats() {
+function Chats({socket}) {
+    useEffect(()=>{
+        console.log('In Chat')
+        socket.on('receive_message',(data)=>{
+            console.log(data);
+        })
+    },[]);
+
+   
+
   return (
     <>
         <div className='mx-10 my-20'>
