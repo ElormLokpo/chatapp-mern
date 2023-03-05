@@ -1,18 +1,21 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const UserSchema = mongoose.Schema({
     username : {
         type: String,
-        required:true
+        required: true
     },
     email : {
         type: String,
-        match: [/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,'Enter a valid email']
+        match: [/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,'Enter a valid email'],
+        required: true
     },
     pin: {
         type: String,
-        max: [4, '4-digit pin max']
+        max: [4, '4-digit pin max'],
+        required: true
     }
 }, {timestamps: true});
 
@@ -27,6 +30,15 @@ UserSchema.methods.comparePin = async function (pin){
     is_val = await bcrypt.compare(pin, this.pin);
     console.log(is_val);
     return is_val;
+}
+
+UserSchema.methods.createToken = async function(){
+    const token = await jwt.sign({id: this._id}, process.env.TOKEN_SECRET, {
+        expiresIn: process.env.TOKEN_EXPIRE
+    });
+
+
+    return token;
 }
 
 
