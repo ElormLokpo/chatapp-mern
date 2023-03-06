@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
+import axios from '../../services/axios';
 
 
 function Auth() {
-  const [fullname, setFullname] = useState();
+  const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [confirmpass, setConfirmPassword] = useState();
@@ -20,8 +21,20 @@ function Auth() {
   }
 
 
- const handleSubmit = ()=>{
-    console.log('submitted');
+ const handleSignUpSubmit = ()=>{
+    axios.post('/auth/register',{
+        username,email,password
+    }).then(res=>{
+        console.log(res.data);
+    })
+ }
+
+ const handleSignInSubmit = ()=>{
+    axios.post('/auth/login',{
+       email,password
+    }).then(res=>{
+        console.log(res.data);
+    })
  }
 
 
@@ -43,8 +56,8 @@ function Auth() {
                 {
                     renderForm == 'signup' &&  <div className='mt-4'>
                         <div className='flex flex-col mb-3'>
-                            <label className='text-xs mb-1'>Fullname:</label>
-                            <input type = 'text' className='py-2 rounded bgc-gray-500' onChange = { e=>setFullname(e.target.value)}/>
+                            <label className='text-xs mb-1'>Username:</label>
+                            <input type = 'text' className='py-2 rounded bgc-gray-500' onChange = { e=>setUsername(e.target.value)}/>
                         </div>
 
                         <div className='flex flex-col mb-3'>
@@ -63,7 +76,7 @@ function Auth() {
                         </div>
 
                         <div className='w-full my-2'>
-                            <button className='bg-rose-600 hover:bg-rose-900 w-full py-3 rounded text-xs text-white' onClick = {handleSubmit}>Sign Up</button>
+                            <button className='bg-rose-600 hover:bg-rose-900 w-full py-3 rounded text-xs text-white' onClick = {handleSignUpSubmit}>Sign Up</button>
                         </div>     
                     
                 </div>
@@ -86,7 +99,7 @@ function Auth() {
 
 
                         <div className='w-full my-2'>
-                            <button className='bg-rose-600 hover:bg-rose-900 w-full py-3 rounded text-xs text-white' onClick = {handleSubmit}>Sign In</button>
+                            <button className='bg-rose-600 hover:bg-rose-900 w-full py-3 rounded text-xs text-white' onClick = {handleSignInSubmit}>Sign In</button>
                         </div>     
                     
                 </div>
