@@ -11,8 +11,8 @@ function Main() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='signin' element = {<Auth />} />
-        <Route path='chat' element = { <Chat socket = {socket} />} />
+        <Route path = '/signin' element = {<Auth />} />
+        <Route path = '/chat' element = { <Chat socket = {socket} />} />
       </Routes>
 
      

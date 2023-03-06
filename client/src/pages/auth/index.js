@@ -1,14 +1,19 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from '../../services/axios';
-
+import {useNavigate} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {storeToken, storeUsrData} from '../../services/redux/slices/authSlice'
 
 function Auth() {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [confirmpass, setConfirmPassword] = useState();
+  const [pin, setPin] = useState();
+  const [confirmpass, setConfirmPin] = useState();
   const [renderForm, setRenderForm] = useState('signup');
   const [formTitle, setFormTitle] = useState('Sign Up')
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const showSignUp = ()=>{
     setRenderForm('signup');
@@ -23,20 +28,39 @@ function Auth() {
 
  const handleSignUpSubmit = ()=>{
     axios.post('/auth/register',{
-        username,email,password
+        username,email,pin
     }).then(res=>{
-        console.log(res.data);
+        
+        if(res.data.token || res.data.usrData){
+            dispatch(storeToken(res.data.token));
+            dispatch(storeUsrData(res.data.usrdata));
+        }
+
     })
  }
 
  const handleSignInSubmit = ()=>{
     axios.post('/auth/login',{
-       email,password
+       email,pin
     }).then(res=>{
         console.log(res.data);
+
+        if(res.data.token || res.data.usrData){
+            dispatch(storeToken(res.data.token));
+            dispatch(storeUsrData(res.data.usrdata));
+        }
+
     })
  }
 
+  let if_token =  useSelector(state=>state.loginS.value.token);
+
+  useEffect(()=>{
+    if(if_token){
+        navigate('/chat');
+    }
+
+  },[if_token])
 
   return (
     <div className='h-full flex justify-center align-center'>
@@ -66,13 +90,13 @@ function Auth() {
                         </div>
 
                         <div className='flex flex-col mb-3'>
-                            <label className='text-xs mb-1'>Password:</label>
-                            <input type = 'password' className='py-2 rounded bgc-gray-500' onChange = { e=>setPassword(e.target.value)}/>
+                            <label className='text-xs mb-1'>Pin:</label>
+                            <input type = 'password' className='py-2 rounded bgc-gray-500' onChange = { e=>setPin(e.target.value)}/>
                         </div>
 
                         <div className='flex flex-col mb-5'>
-                            <label className='text-xs mb-1'>Confirm Password:</label>
-                            <input type = 'password' className='py-2 rounded bgc-gray-500' onChange = { e=>setConfirmPassword(e.target.value)}/>
+                            <label className='text-xs mb-1'>Confirm Pin:</label>
+                            <input type = 'password' className='py-2 rounded bgc-gray-500' onChange = { e=>setConfirmPin(e.target.value)}/>
                         </div>
 
                         <div className='w-full my-2'>
@@ -93,8 +117,8 @@ function Auth() {
                         </div>
 
                         <div className='flex flex-col mb-5'>
-                            <label className='text-xs mb-1'>Password:</label>
-                            <input type = 'password' className='py-2 rounded bgc-gray-500' onChange = { e=>setPassword(e.target.value)}/>
+                            <label className='text-xs mb-1'>Pin:</label>
+                            <input type = 'password' className='py-2 rounded bgc-gray-500' onChange = { e=>setPin(e.target.value)}/>
                         </div>
 
 

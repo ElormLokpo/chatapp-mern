@@ -18,7 +18,12 @@ exports.registerUserController = async (req,res,next)=>{
         
         const data = await UserModel.create({username, email, pin});
     
-        res.status(200).json({success:true, data});
+        let token = null;
+        if(data){
+            token = await data.createToken();
+        }
+
+        res.status(200).json({success:true, usrdata: {email: data.email, username: data.username, id: data._id, created: data.createdAt } , token});
         next();
     } catch(err){
         next(new ErrHandler('Something went wrong')); 
@@ -55,7 +60,7 @@ exports.loginUserController = async (req,res,next)=>{
            
         }
 
-        res.status(200).json({success:true, msg:'Login successful', token});
+        res.status(200).json({success:true,usrdata: {email: userEmail.email, username: userEmail.username, id: userEmail._id, created: userEmail.createdAt }, msg:'Login successful', token});
         next();
 
     } catch(err){
