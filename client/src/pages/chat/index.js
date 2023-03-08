@@ -1,12 +1,7 @@
 import React from 'react';
-import Chats from '../../components/chats';
-import MessageBox from '../../components/messagebox';
+import ChatGroup from '../../components/chatgroup';
 import SideNav from '../../components/sidenav';
-import TopNav from '../../components/topnav';
-
-
-
-
+import Friends from '../friends';
 
 function Chat({socket}) {
 
@@ -15,10 +10,8 @@ function Chat({socket}) {
        <SideNav socket = {socket} />
 
         <div className=' col-span-10'>
-           <TopNav />
-           <Chats socket = {socket} />
-
-           <MessageBox socket = {socket} />
+            {/* <ChatGroup socket = {socket} /> */}
+            <Friends />
         </div>
     </div>
   )
