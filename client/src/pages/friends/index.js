@@ -22,7 +22,7 @@ function Friends() {
             {
               users.length > 0 ?
                 users.map(i=><Friend details = {i} />)
-              : <p>No Users on network to add</p>
+              : <p>No users to add as friends</p>
             }
            
         </div>
