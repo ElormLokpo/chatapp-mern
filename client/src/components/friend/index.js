@@ -1,10 +1,14 @@
 import React from 'react';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import { BsDot } from 'react-icons/bs';
+import axios from '../../services/axios';
 
 
 function Friend({details}) {
 
+  const handleAddFriend = ()=>{
+       axios.post('/')
+  }
 
   return (
     <>
@@ -25,7 +29,7 @@ function Friend({details}) {
             </div>
         </div>
     
-        <div className='flex align-center'>
+        <div className='flex align-center hover:cursor-pointer' onClick = {handleAddFriend}>
             <p> <AiOutlineUserAdd /> </p>
         </div>
      </div>

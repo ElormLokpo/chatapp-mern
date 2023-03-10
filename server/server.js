@@ -6,7 +6,8 @@ const connectDB = require('./utils/dbConfig');
 const cors = require('cors');
 const {errorHandler} = require('./middleware/error.handler.middleware');
 
-const userRoutes = require('./routes/user.routes')
+const userRoutes = require('./routes/user.routes');
+const friendRoutes = require('./routes/friends.route');
 
 dotenv.config({path:'./config/.env'});
 const app = express();
@@ -17,6 +18,7 @@ connectDB();
 app.use(express.json());
 app.use(cors());
 app.use('/auth', userRoutes);
+app.use('/friends', friendRoutes);
 app.use(errorHandler);
 
 const io = new Server(server, {

@@ -1,5 +1,6 @@
 const UserModel = require('../models/user.models');
 const ErrHandler = require('../utils/errHandler');
+const FriendModel = require('../models/friends.model');
 
 
 exports.registerUserController = async (req,res,next)=>{
@@ -22,7 +23,7 @@ exports.registerUserController = async (req,res,next)=>{
         if(data){
             token = await data.createToken();
         }
-
+        const friends = await FriendModel.create({user: data._id, friends:[]});
         res.status(200).json({success:true, usrdata: {email: data.email, username: data.username, id: data._id, created: data.createdAt } , token});
         next();
     } catch(err){
