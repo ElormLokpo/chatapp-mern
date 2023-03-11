@@ -16,7 +16,7 @@ function Friends() {
 
   return (
     <div className='my-10 mx-20'>
-        <p className='text-lg mb-4 font-semibold'>Friends</p>
+        <p className='text-lg mb-4 font-semibold'>Friendss</p>
 
         <div>
             {
