@@ -2,12 +2,20 @@ import React from 'react';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import { BsDot } from 'react-icons/bs';
 import axios from '../../services/axios';
+import {useSelector} from 'react-redux';
+
 
 
 function Friend({details}) {
 
+  const current_user = useSelector(state=> state.loginS.value.userDetails);
+  
   const handleAddFriend = ()=>{
-       axios.post('/')
+      console.log(current_user.id, details._id);
+      axios.post('/friends/addfriend',{userid: current_user.id, friendid: details._id})
+      .then((res)=>{
+        console.log(res.data);
+      })
   }
 
   return (

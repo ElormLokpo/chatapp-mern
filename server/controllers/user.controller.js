@@ -24,7 +24,7 @@ exports.registerUserController = async (req,res,next)=>{
             token = await data.createToken();
         }
         const friends = await FriendModel.create({user: data._id, friends:[]});
-        res.status(200).json({success:true, usrdata: {email: data.email, username: data.username, id: data._id, created: data.createdAt } , token});
+        res.status(200).json({success:true, usrdata: {email: data.email, username: data.username, id: data._id, created: data.createdAt, friends } , token});
         next();
     } catch(err){
         next(new ErrHandler('Something went wrong')); 

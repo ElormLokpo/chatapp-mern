@@ -1,17 +1,30 @@
 import React,{useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 import { BsDot } from 'react-icons/bs';
+import axios from '../../services/axios';
 
 function SideNav({socket}) {
     const [room, setRoom] = useState();
-
+    const [friends, setFriends] = useState();
     
     const setRoomHandler = ()=>{
         // socket.emit('join-room', room);
         // console.log('emmitted');
     }
 
+
+
+    const current_user = useSelector(state=>state.loginS.value.userDetails);
+    console.log('CURRENT_USER', current_user);
+
     useEffect(()=>{
         socket.emit('join-room',room);
+        axios.get(`/friends/getfriends/${current_user.id}`)
+        .then(res=>{
+            console.log('firends sides', res.data.data[0].friends);
+        })
+
+
     },[])
   return (
     <>  
@@ -24,8 +37,8 @@ function SideNav({socket}) {
                     </div>
                     
                     <div>
-                        <p className='text-white text-lg font-semibold'>User One</p>
-                        <p className='text-white text-sm font-light'>userone@gmail.com</p>
+                        <p className='text-white text-lg font-semibold'>{current_user.username || 'Guest'}</p>
+                        <p className='text-white text-sm font-light'>{current_user.email || 'guest@email.com'}</p>
                     </div>
                     
                 </div>
